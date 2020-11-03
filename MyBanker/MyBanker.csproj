@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="Debet Cards\Maestro.cs" />
     <Compile Include="Credit Cards\Mastercard.cs" />
+    <Compile Include="Interfaces\IAccount.cs" />
     <Compile Include="Interfaces\IDebetcard.cs" />
     <Compile Include="Interfaces\ICreditcard.cs" />
     <Compile Include="Interfaces\ICard.cs" />

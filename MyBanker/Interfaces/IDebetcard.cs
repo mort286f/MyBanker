@@ -8,7 +8,7 @@ namespace MyBanker
 {
     interface IDebetcard
     {
-        public double MaxAmount { get; set; }
+        public double MaxMonthly { get; set; }
         public int MinAge { get; set; }
         public bool IsUsableInternational { get; set; }
         public bool IsUsableOnNet { get; set; }

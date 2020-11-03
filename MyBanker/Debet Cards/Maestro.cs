@@ -6,38 +6,32 @@ using System.Threading.Tasks;
 
 namespace MyBanker
 {
-    class Maestro : ICard, IDebetcard
+    class Maestro : Card, IDebetcard
     {
         private string name;
-        public string Name
+        public override string Name
         {
             get { return name; }
             set { name = value; }
         }
-        public string CardNumber { get; set; }
-        private string expireDate;
-        public string ExpireDate
+        public override string CardNumber { get; set; }
+        private DateTime? expireDate;
+        public override DateTime? ExpireDate
         {
             get { return expireDate; }
             set { expireDate = value; }
         }
         private long accountNumber;
-        public long AccountNumber
+        public override long AccountNumber
         {
             get { return accountNumber; }
             set { accountNumber = value; }
         }
-        private List<int> prefix;
-        public List<int> Prefix
+        private double maxMonthly;
+        public double MaxMonthly
         {
-            get { return prefix; }
-            set { prefix = value; }
-        }
-        private double maxAmount;
-        public double MaxAmount
-        {
-            get { return maxAmount; }
-            set { maxAmount = value; }
+            get { return maxMonthly; }
+            set { maxMonthly = value; }
         }
         private int minAge;
         public int MinAge
@@ -57,15 +51,28 @@ namespace MyBanker
             get { return isUsableOnNet; }
             set { isUsableOnNet = value; }
         }
-
-        public Maestro()
+        private List<int> prefix = new List<int>() { 5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763 };
+        public Maestro(string name) : base(name)
         {
-
+            
+            this.CardNumber = GenerateCardNumber();
+            this.ExpireDate = DateTime.Now.AddYears(5).AddMonths(8);
+            this.MinAge = 18;
+            this.MaxMonthly = 0;
+            this.IsUsableInternational = true;
+            this.IsUsableOnNet = true;
         }
-
-        public string GenerateCardNumber()
+        public override string GenerateCardNumber()
         {
-            throw new NotImplementedException();
+            Random rndm = new Random();
+            int number = rndm.Next(0, 8);
+            CardNumber = prefix.ElementAt(number).ToString();
+            for (int i = 0; i < 15; i++)
+            {
+                int nmbr = rndm.Next(0, 10);
+                CardNumber += nmbr;
+            }
+            return CardNumber;
         }
     }
 }

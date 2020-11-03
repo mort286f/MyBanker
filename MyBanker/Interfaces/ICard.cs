@@ -12,6 +12,6 @@ namespace MyBanker
         public string CardNumber { get; set; }
         public string ExpireDate { get; set; }
         public long AccountNumber { get; set; }
-        public string GenerateCardNumber();
+        string GenerateCardNumber();
     }
 }

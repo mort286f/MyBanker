@@ -8,49 +8,16 @@ namespace MyBanker
 {
     public abstract class Card
     {
-        private string name;
+        public abstract string Name { get; set; }
+        public abstract string CardNumber { get; set; }
+        public abstract DateTime? ExpireDate { get; set; }
+        public abstract long AccountNumber { get; set; }
 
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        private ulong cardNumber;
+        public abstract string GenerateCardNumber();
 
-        public ulong CardNumber
-        {
-            get { return cardNumber; }
-            set { cardNumber = value; }
-        }
-        private string expireDate;
-
-        public string ExpireDate
-        {
-            get { return expireDate; }
-            set { expireDate = value; }
-        }
-        private long accountNumber;
-
-        public long AccountNumber
-        {
-            get { return accountNumber; }
-            set { accountNumber = value; }
-        }
-        private List<int> prefix;
-
-        public List<int> Prefix
-        {
-            get { return prefix; }
-            set { prefix = value; }
-        }
-
-        public Card(string name, ulong cardNumber, string expireDate, long accountNumber, List<int> prefix)
+        public Card(string name)
         {
             this.Name = name;
-            this.CardNumber = cardNumber;
-            this.ExpireDate = expireDate;
-            this.AccountNumber = accountNumber;
-            this.Prefix = prefix;
         }
     }
 }

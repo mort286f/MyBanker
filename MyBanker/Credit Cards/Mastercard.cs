@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 
 namespace MyBanker
 {
-    class Mastercard : ICard, ICreditcard
+    class Mastercard : Card, ICreditcard
     {
         private string name;
-        public string Name
+        public override string Name
         {
             get { return name; }
             set { name = value; }
         }
-        public string CardNumber { get; set; }
-        private string expireDate;
-        public string ExpireDate
+        public override string CardNumber { get; set; }
+        private DateTime? expireDate;
+        public override DateTime? ExpireDate
         {
             get { return expireDate; }
             set { expireDate = value; }
         }
         private long accountNumber;
-        public long AccountNumber
+        public override long AccountNumber
         {
             get { return accountNumber; }
             set { accountNumber = value; }
         }
-        private List<int> Prefix = new List<int>() { 51, 52, 53, 54, 55 };
         private double kredit;
         public double Kredit
         {
@@ -40,17 +39,19 @@ namespace MyBanker
             get { return monthlyWithdraw; }
             set { monthlyWithdraw = value; }
         }
+        private List<int> prefix = new List<int>() { 51, 52, 53, 54, 55 };
 
-        public Mastercard()
+        public Mastercard(string name) : base(name)
         {
-
+            this.CardNumber = GenerateCardNumber();
+            this.ExpireDate = DateTime.Now.AddYears(5);
         }
 
-        public string GenerateCardNumber()
+        public override string GenerateCardNumber()
         {
             Random rndm = new Random();
             int number = rndm.Next(0, 4);
-            CardNumber = Prefix.ElementAt(number).ToString();
+            CardNumber = prefix.ElementAt(number).ToString();
             for (int i = 0; i < 14; i++)
             {
                 int nmbr = rndm.Next(0, 10);

@@ -6,27 +6,26 @@ using System.Threading.Tasks;
 
 namespace MyBanker
 {
-    class VISADankort : ICard, ICreditcard
+    class VISADankort : Card, ICreditcard
     {
-        #region Properties
         private string name;
 
-        public string Name
+        public override string Name
         {
             get { return name; }
             set { name = value; }
         }
-        public string CardNumber { get; set; }
-        private string expireDate;
+        public override string CardNumber { get; set; }
+        private DateTime? expireDate;
 
-        public string ExpireDate
+        public override DateTime? ExpireDate
         {
             get { return expireDate; }
             set { expireDate = value; }
         }
         private long accountNumber;
 
-        public long AccountNumber
+        public override long AccountNumber
         {
             get { return accountNumber; }
             set { accountNumber = value; }
@@ -45,16 +44,23 @@ namespace MyBanker
             get { return monthlyWithdraw; }
             set { monthlyWithdraw = value; }
         }
-        #endregion
-
-        public VISADankort()
+        private List<int> prefix = new List<int>() { 4 };
+        public VISADankort(string name) : base(name)
         {
-
+            this.CardNumber = GenerateCardNumber();
+            this.ExpireDate = DateTime.Now.AddYears(5);
         }
 
-        public string GenerateCardNumber()
+        public override string GenerateCardNumber()
         {
-            throw new NotImplementedException();
+            Random rndm = new Random();
+            CardNumber = prefix.ElementAt(0).ToString();
+            for (int i = 0; i < 15; i++)
+            {
+                int nmbr = rndm.Next(0, 10);
+                CardNumber += nmbr;
+            }
+            return CardNumber;
         }
     }
 }

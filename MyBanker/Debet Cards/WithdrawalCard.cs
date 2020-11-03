@@ -6,38 +6,32 @@ using System.Threading.Tasks;
 
 namespace MyBanker
 {
-    class WithdrawalCard : ICard, IDebetcard
+    class WithdrawalCard : Card, IDebetcard
     {
         private string name;
-        public string Name
+        public override string Name
         {
             get { return name; }
             set { name = value; }
         }
-        public string CardNumber { get; set; }
-        private string expireDate;
-        public string ExpireDate
+        public override string CardNumber { get; set; }
+        private DateTime? expireDate;
+        public override DateTime? ExpireDate
         {
             get { return expireDate; }
             set { expireDate = value; }
         }
         private long accountNumber;
-        public long AccountNumber
+        public override long AccountNumber
         {
             get { return accountNumber; }
             set { accountNumber = value; }
         }
-        private List<int> prefix;
-        public List<int> Prefix
+        private double maxMonthly;
+        public double MaxMonthly
         {
-            get { return prefix; }
-            set { prefix = value; }
-        }
-        private double maxAmount;
-        public double MaxAmount
-        {
-            get { return maxAmount; }
-            set { maxAmount = value; }
+            get { return maxMonthly; }
+            set { maxMonthly = value; }
         }
         private int minAge;
         public int MinAge
@@ -57,19 +51,26 @@ namespace MyBanker
             get { return isUsableOnNet; }
             set { isUsableOnNet = value; }
         }
-        public WithdrawalCard()
+        private List<int> prefix = new List<int>() { 2400 };
+        public WithdrawalCard(string name) : base(name)
         {
-
+            this.CardNumber = GenerateCardNumber();
+            this.ExpireDate = null;
+            this.MinAge = 0;
+            this.MaxMonthly = 0;
+            this.IsUsableInternational = false;
+            this.IsUsableOnNet = false;
         }
-
-        public bool CheckExpireDate()
+        public override string GenerateCardNumber()
         {
-            throw new NotImplementedException();
-        }
-
-        public string GenerateCardNumber()
-        {
-            throw new NotImplementedException();
+            Random rndm = new Random();
+            CardNumber = prefix.ElementAt(0).ToString();
+            for (int i = 0; i < 12; i++)
+            {
+                int nmbr = rndm.Next(0, 10);
+                CardNumber += nmbr;
+            }
+            return CardNumber;
         }
     }
 }
