@@ -12,6 +12,7 @@ namespace MyBanker
         {
             Mastercard mastercard = new Mastercard();
             Console.WriteLine(mastercard.GenerateCardNumber());
+            Console.WriteLine();
             Console.ReadKey();
         }
     }
