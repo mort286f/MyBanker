@@ -12,20 +12,20 @@ namespace MyBanker
         public override string Name
         {
             get { return name; }
-            set { name = value; }
+            protected set { name = value; }
         }
-        public override string CardNumber { get; set; }
+        public override string CardNumber { get; protected set; }
         private DateTime? expireDate;
         public override DateTime? ExpireDate
         {
             get { return expireDate; }
-            set { expireDate = value; }
+            protected set { expireDate = value; }
         }
         private long accountNumber;
         public override long AccountNumber
         {
             get { return accountNumber; }
-            set { accountNumber = value; }
+            protected set { accountNumber = value; }
         }
         private double maxMonthly;
         public double MaxMonthly
@@ -34,7 +34,7 @@ namespace MyBanker
             set { maxMonthly = value; }
         }
         private int minAge;
-        public int MinAge
+        public override int MinAge
         {
             get { return minAge; }
             set { minAge = value; }
@@ -51,6 +51,7 @@ namespace MyBanker
             get { return isUsableOnNet; }
             set { isUsableOnNet = value; }
         }
+        //List containing prefixes for Maestro cards
         private List<int> prefix = new List<int>() { 5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763 };
         public Maestro(string name) : base(name)
         {
@@ -62,6 +63,8 @@ namespace MyBanker
             this.IsUsableInternational = true;
             this.IsUsableOnNet = true;
         }
+
+        //Generates a random 19 long card number with prefix
         public override string GenerateCardNumber()
         {
             Random rndm = new Random();

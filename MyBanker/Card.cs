@@ -8,10 +8,11 @@ namespace MyBanker
 {
     public abstract class Card
     {
-        public abstract string Name { get; set; }
-        public abstract string CardNumber { get; set; }
-        public abstract DateTime? ExpireDate { get; set; }
-        public abstract long AccountNumber { get; set; }
+        public abstract string Name { get; protected set; }
+        public abstract string CardNumber { get; protected set; }
+        public abstract DateTime? ExpireDate { get; protected set; }
+        public abstract long AccountNumber { get; protected set; }
+        public abstract int MinAge { get; set; }
 
         public abstract string GenerateCardNumber();
 

@@ -12,20 +12,20 @@ namespace MyBanker
         public override string Name
         {
             get { return name; }
-            set { name = value; }
+            protected set { name = value; }
         }
-        public override string CardNumber { get; set; }
+        public override string CardNumber { get; protected set; }
         private DateTime? expireDate;
         public override DateTime? ExpireDate
         {
             get { return expireDate; }
-            set { expireDate = value; }
+            protected set { expireDate = value; }
         }
         private long accountNumber;
         public override long AccountNumber
         {
             get { return accountNumber; }
-            set { accountNumber = value; }
+            protected set { accountNumber = value; }
         }
         private double maxMonthly;
         public double MaxMonthly
@@ -35,7 +35,7 @@ namespace MyBanker
         }
 
         private int minAge;
-        public int MinAge
+        public override int MinAge
         {
             get { return minAge; }
             set { minAge = value; }
@@ -52,6 +52,7 @@ namespace MyBanker
             get { return isUsableOnNet; }
             set { isUsableOnNet = value; }
         }
+        //List of prefixes for Visa Electron cards
         private List<int> prefix = new List<int>() { 4026, 417500, 4508, 4844, 4913, 4917 };
         public VISAElectron(string name) : base(name)
         {
@@ -63,6 +64,7 @@ namespace MyBanker
             this.IsUsableOnNet = true;
         }
 
+        //Generates a random 16 long card number with prefix
         public override string GenerateCardNumber()
         {
             Random rndm = new Random();

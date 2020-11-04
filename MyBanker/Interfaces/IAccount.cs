@@ -9,5 +9,6 @@ namespace MyBanker
     interface IAccount
     {
         string AccountNumber { get; set; }
+        string GenerateAccountNumber();
     }
 }
