@@ -52,7 +52,6 @@
     <Compile Include="Interfaces\IAccount.cs" />
     <Compile Include="Interfaces\IDebetcard.cs" />
     <Compile Include="Interfaces\ICreditcard.cs" />
-    <Compile Include="Interfaces\ICard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Credit Cards\VISADankort.cs" />
